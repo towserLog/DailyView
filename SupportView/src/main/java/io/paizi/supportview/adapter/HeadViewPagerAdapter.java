@@ -1,6 +1,7 @@
 package io.paizi.supportview.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v4.view.PagerAdapter;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -9,9 +10,11 @@ import android.view.WindowManager;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.paizi.supportview.BuildConfig;
 import io.paizi.supportview.R;
 
 /**
@@ -51,7 +54,7 @@ public class HeadViewPagerAdapter<T> extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         if(viewList.size() <= position||viewList.get(position)==null){
             SimpleDraweeView simpleDraweeView = new SimpleDraweeView(context);
-            simpleDraweeView.setImageResource(R.drawable.a6);
+            simpleDraweeView.setImageResource(R.drawable.urabe);
             viewList.add(simpleDraweeView);
         }
         container.addView(viewList.get(position));

@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">CoordinatorLayoutDemo</string>
+    <string name="app_name">SupportView</string>
+    <string name="drag_top">dragtop</string>
+    <string name="swipe">swipe_recycle</string>
+
+    <string name="vip">了解会员特权</string>
+    <string name="wifi">仅Wi-Fi联网</string>
+    <string name="simple">简洁模式</string>
+    <string name="message">消息</string>
+    <string name="theme">主题</string>
+    <string name="about">关于</string>
 </resources>

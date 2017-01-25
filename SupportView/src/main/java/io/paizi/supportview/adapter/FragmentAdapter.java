@@ -34,7 +34,7 @@ public class FragmentAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return super.getPageTitle(position);
+        return "第"+position+"页";
     }
 
     public boolean isEmpty(){

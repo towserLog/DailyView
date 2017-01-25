@@ -3,10 +3,10 @@ package io.paizi.supportview.ui.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
+import io.paizi.supportview.app.BaseActivity;
 import io.paizi.supportview.R;
 import io.paizi.supportview.adapter.ContentPagerAdapter;
 
@@ -15,7 +15,7 @@ import io.paizi.supportview.adapter.ContentPagerAdapter;
  *
  */
 
-public class ViewPagerRecycleActivity extends AppCompatActivity {
+public class ViewPagerRecycleActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

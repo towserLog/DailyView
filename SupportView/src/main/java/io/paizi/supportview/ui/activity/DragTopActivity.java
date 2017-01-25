@@ -1,9 +1,9 @@
 package io.paizi.supportview.ui.activity;
 
 import android.content.Context;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -12,27 +12,38 @@ import android.view.WindowManager;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import io.paizi.myutils.StatusUtil;
 import io.paizi.supportview.R;
 import io.paizi.supportview.adapter.FragmentAdapter;
 import io.paizi.supportview.adapter.HeadViewPagerAdapter;
+import io.paizi.supportview.app.BaseActivity;
 import io.paizi.supportview.ui.fragment.ListFragment;
 
-public class DragTopActivity extends AppCompatActivity{
+/**
+ *
+ */
+public class DragTopActivity extends BaseActivity {
     private static final String TAG = DragTopActivity.class.getSimpleName();
-    private Context context;
 
-    private ViewPager headViewPager;
-    private ViewPager contentViewPager;
+    @BindView(R.id.head_view_pager)
+    ViewPager headViewPager;
+
+    @BindView(R.id.content_view_pager)
+    ViewPager contentViewPager;
+
+    @BindView(R.id.tab_layout)
+    TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = this;
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_drag_top);
 
-        headViewPager = (ViewPager) findViewById(R.id.head_view_pager);
-        contentViewPager = (ViewPager) findViewById(R.id.content_view_pager);
-        
+        StatusUtil.setStatusTransparent(this, false);
+        ButterKnife.bind(this);
+
         setHeadViewPagerHeight();
         setViewPager();
     }
@@ -40,14 +51,26 @@ public class DragTopActivity extends AppCompatActivity{
     private void setViewPager() {
         ArrayList<String> arrayList = new ArrayList<>();
         ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
-        for (int i=0;i<22;i++) {
+        for (int i=0;i<4;i++) {
             arrayList.add("--> "+i+" <---");
             fragmentArrayList.add(new ListFragment());
+//            TabLayout.Tab tab = tabLayout.newTab().setText("第"+i+"页");
+//            tabLayout.addTab(tab);
         }
-        HeadViewPagerAdapter headViewPagerAdapter = new HeadViewPagerAdapter<>(context, arrayList);
+        HeadViewPagerAdapter headViewPagerAdapter = new HeadViewPagerAdapter<>(mContext, arrayList);
         FragmentAdapter contentPagerAdapter = new FragmentAdapter(getSupportFragmentManager(), fragmentArrayList, arrayList);
         headViewPager.setAdapter(headViewPagerAdapter);
         contentViewPager.setAdapter(contentPagerAdapter);
+        //将tablayout和viewpager关联起来
+//        LinearLayoutCompat
+//        for (int i=0;i<22;i++) {
+//            TabLayout.Tab tab = tabLayout.newTab().setText("第"+i+"页");
+//            tabLayout.addTab(tab);
+//        }
+        tabLayout.setupWithViewPager(contentViewPager);
+//        for (int i=0;i<22;i++) {
+//            tabLayout.getTabAt(i).setText("第"+i+"页");
+//        }
     }
 
     private void setHeadViewPagerHeight() {
@@ -62,7 +85,7 @@ public class DragTopActivity extends AppCompatActivity{
     }
 
     private int getScreenWidth(){
-        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        WindowManager windowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         Log.i(TAG, "width--->"+displayMetrics.widthPixels+"   height--->"+displayMetrics.heightPixels);

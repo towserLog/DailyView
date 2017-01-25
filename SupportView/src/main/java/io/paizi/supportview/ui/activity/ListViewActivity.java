@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.ViewGroup;
@@ -15,13 +14,14 @@ import java.util.ArrayList;
 import io.paizi.supportview.R;
 import io.paizi.supportview.adapter.HeadViewPagerAdapter;
 import io.paizi.supportview.adapter.ListContentAdapter;
+import io.paizi.supportview.app.BaseActivity;
 
 /**
  * Created by pai on 2016/12/21.
  *
  */
 
-public class ListViewActivity extends AppCompatActivity {
+public class ListViewActivity extends BaseActivity {
     private static final String TAG = ListViewActivity.class.getSimpleName();
     private Context context;
 
@@ -31,7 +31,6 @@ public class ListViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_drag_top);
         context = this;
         setContentView(R.layout.activity_drag_top);
 

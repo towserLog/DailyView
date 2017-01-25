@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/vip"
+        android:title="@string/vip"
+        android:icon="@mipmap/vip"
+        />
+
+    <item android:id="@+id/wifi"
+        android:title="@string/wifi"
+        android:icon="@mipmap/wifi"
+        />
+
+    <item android:id="@+id/simple"
+        android:title="@string/simple"
+        android:icon="@mipmap/simple"
+        />
+
+    <group android:checkableBehavior="all">
+        <item android:id="@+id/message"
+            android:title="@string/message"
+            android:icon="@mipmap/message"
+            />
+
+        <item android:id="@+id/theme"
+            android:title="@string/theme"
+            android:icon="@mipmap/theme"
+            />
+
+        <item android:id="@+id/about"
+            android:title="@string/about"
+            android:icon="@mipmap/about"
+            />
+    </group>
+
+</menu>

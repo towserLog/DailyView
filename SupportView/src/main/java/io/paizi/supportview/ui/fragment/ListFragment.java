@@ -2,7 +2,6 @@ package io.paizi.supportview.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,40 +10,46 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import io.paizi.supportview.app.BaseFragment;
+import io.paizi.supportview.widget.recycle.Divider;
 import io.paizi.supportview.R;
 import io.paizi.supportview.adapter.RecycleViewAdapter;
-import io.paizi.supportview.anim.ItemAnim;
+import io.paizi.supportview.widget.recycle.ItemAnim;
 
 /**
  * Created by pai on 2016/12/21.
  *
  */
 
-public class ListFragment extends Fragment {
-    private RecyclerView contentView;
+public class ListFragment extends BaseFragment {
+    private RecyclerView recyclerView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if(contentView==null){
-            contentView = (RecyclerView) inflater
+        if(recyclerView ==null){
+            recyclerView = (RecyclerView) inflater
                     .inflate(R.layout.recycle_view, null, false);
-            contentView
-                    .setLayoutManager(new LinearLayoutManager(inflater.getContext()));
-            contentView.setItemAnimator(new ItemAnim());
+            recyclerView
+                    .setLayoutManager(new LinearLayoutManager(inflater.getContext()/*, LinearLayoutManager.HORIZONTAL, false*/));
+//
+//            recyclerView
+//                    .setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
+            recyclerView.setItemAnimator(new ItemAnim());
 
             ArrayList<String> arrayList = new ArrayList();
             for (int i=0;i<222;i++) {
                 arrayList.add("--> "+i+" <---");
             }
-            contentView.setAdapter(
+            recyclerView.addItemDecoration(new Divider(getContext(), LinearLayoutManager.VERTICAL));
+            recyclerView.setAdapter(
                     new RecycleViewAdapter(inflater.getContext(), arrayList));
         }
-        ViewGroup parent = (ViewGroup) contentView.getParent();
+        ViewGroup parent = (ViewGroup) recyclerView.getParent();
         if(parent != null){
-            parent.removeView(contentView);
+            parent.removeView(recyclerView);
         }
-        return contentView;
+        return recyclerView;
     }
 
 
