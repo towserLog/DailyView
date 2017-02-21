@@ -2,6 +2,12 @@
     <string name="app_name">SupportView</string>
     <string name="drag_top">dragtop</string>
     <string name="swipe">swipe_recycle</string>
+    <string name="login">登录</string>
+    <string name="mediaplayr">mediaplayr</string>
+
+
+    <string name="start">开始</string>
+    <string name="pause">暂停</string>
 
     <string name="vip">了解会员特权</string>
     <string name="wifi">仅Wi-Fi联网</string>
@@ -9,4 +15,7 @@
     <string name="message">消息</string>
     <string name="theme">主题</string>
     <string name="about">关于</string>
+
+    <string name="accunt_hint">请输入用户名</string>
+    <string name="accunt_error">应户名应小于10个字符</string>
 </resources>

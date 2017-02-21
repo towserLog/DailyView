@@ -2,6 +2,7 @@ package io.paizi.supportview.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 
@@ -23,6 +24,13 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.swipe_recycler_view:
                 jump(RecycleViewActicity.class);
+                break;
+            case R.id.login_activity:
+                jump(LoginActivity.class);
+                break;
+            case R.id.mediaplayr_activity:
+                jump(MediaPlayerActivity.class);
+                break;
             default:
                 break;
         }

@@ -19,25 +19,41 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/drag_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size"
-            android:text="@string/app_name"
-            android:onClick="onButtonClick"/>
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/swipe_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size"
-            android:text="@string/swipe"
-            android:onClick="onButtonClick"/>
+            <Button
+                android:id="@+id/drag_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:text="@string/drag_top"
+                android:onClick="onButtonClick"/>
+
+            <Button
+                android:id="@+id/swipe_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:text="@string/swipe"
+                android:onClick="onButtonClick"/>
+
+            <Button
+                android:id="@+id/login_activity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:text="@string/login"
+                android:onClick="onButtonClick"/>
+
+            <Button
+                android:id="@+id/mediaplayr_activity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:text="@string/mediaplayr"
+                android:onClick="onButtonClick"/>
 
     </LinearLayout>
 
