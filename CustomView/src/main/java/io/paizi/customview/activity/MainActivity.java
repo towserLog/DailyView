@@ -1,10 +1,13 @@
 package io.paizi.customview.activity;
 
 import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import io.paizi.customview.R;
 
@@ -29,5 +32,4 @@ public class MainActivity extends AppCompatActivity {
     private void jump(Class<? extends Activity> clazz){
         startActivity(new Intent(this, clazz));
     }
-
 }

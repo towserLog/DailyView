@@ -1,4 +1,4 @@
-package io.paizi.customview.widget;
+package io.paizi.customview.view;
 
 import android.content.Context;
 import android.support.annotation.Nullable;

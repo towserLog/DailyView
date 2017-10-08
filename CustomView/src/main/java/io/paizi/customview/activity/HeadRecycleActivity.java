@@ -16,13 +16,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.paizi.customview.R;
-import io.paizi.customview.widget.HeaderRecyclerView;
-import io.paizi.myutils.BaseActivity;
+import io.paizi.customview.view.HeaderRecyclerView;
 
 /**
  * Created by pai on 2017/1/21.
  * 测试HeaderRecyclerView
- * {@link io.paizi.customview.widget.HeaderRecyclerView}
+ * {@link HeaderRecyclerView}
  */
 
 public class HeadRecycleActivity extends BaseActivity {
