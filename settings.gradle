@@ -1,1 +1,1 @@
-include ':CustomView', ':SupportView'
+include ':CustomView', ':SupportView', ':myutils', ':quiz'
