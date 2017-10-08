@@ -4,15 +4,18 @@ import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.ViewGroup;
 
 import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.paizi.myutils.ScreenUtil;
 import io.paizi.supportview.R;
 import io.paizi.supportview.app.BaseActivity;
 
@@ -24,13 +27,10 @@ import io.paizi.supportview.app.BaseActivity;
 public class MediaPlayerActivity extends BaseActivity {
     private static final String TAG = "mediatest.Main";
 
-    MediaPlayer mediaPlayer;
+    MediaPlayer musicPlayer;
 
     @BindView(R.id.surface_view)
     SurfaceView mSurfaceView;
-
-//    @BindView(R.id.video_view)
-//    VideoView videoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,29 +38,29 @@ public class MediaPlayerActivity extends BaseActivity {
         setContentView(R.layout.activity_mediaplayer);
         ButterKnife.bind(this);
 
-        findViewById(R.id.start_button).setOnClickListener(clickListener);
-        findViewById(R.id.pause_button).setOnClickListener(clickListener);
+        findViewById(R.id.start_music_button).setOnClickListener(clickListener);
+        findViewById(R.id.start_video_button).setOnClickListener(clickListener);
+        findViewById(R.id.stop_button).setOnClickListener(clickListener);
 
-        initMediaPlayer();
+        initMediaPlayer(musicPlayer);
         initSurfaceView();
 
-//        videoView.setVideoPath(videoSrc);
-//        videoView.start();
     }
 
-    private void initMediaPlayer(){
-        if(mediaPlayer != null){
-            mediaPlayer.reset();
-            mediaPlayer.release();
-            mediaPlayer = null;
+    private void initMediaPlayer(MediaPlayer mediaPlayer){
+        if(musicPlayer != null){
+            musicPlayer.reset();
+            musicPlayer.release();
+            musicPlayer = null;
         }
-        mediaPlayer = new MediaPlayer();
+        musicPlayer = new MediaPlayer();
 
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        musicPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
-        mediaPlayer.setOnCompletionListener(completionListener);
-        mediaPlayer.setOnErrorListener(errorListener);
-        mediaPlayer.setOnPreparedListener(preparedListener);
+        musicPlayer.setOnCompletionListener(completionListener);
+        musicPlayer.setOnBufferingUpdateListener(onBufferingUpdateLinsener);
+        musicPlayer.setOnErrorListener(errorListener);
+        musicPlayer.setOnPreparedListener(preparedListener);
     }
 
     private void initSurfaceView(){
@@ -75,10 +75,10 @@ public class MediaPlayerActivity extends BaseActivity {
      */
     private void playMusic(String url) {
         try {
-            mediaPlayer.reset();
-            mediaPlayer.setDataSource(url);
-            mediaPlayer.prepareAsync();
-            mediaPlayer.setLooping(true);
+            musicPlayer.reset();
+            musicPlayer.setDataSource(url);
+            musicPlayer.prepareAsync();
+//            musicPlayer.setLooping(true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -90,11 +90,11 @@ public class MediaPlayerActivity extends BaseActivity {
     private void playAssetsMusic(String resName) {
         try {
             AssetFileDescriptor fileDescripter = getAssets().openFd(resName);
-            mediaPlayer.reset();
-            mediaPlayer.setDataSource(fileDescripter.getFileDescriptor(), fileDescripter.getStartOffset(), fileDescripter.getLength());
-            mediaPlayer.prepare();
-            mediaPlayer.start();
-            mediaPlayer.setLooping(true);
+            musicPlayer.reset();
+            musicPlayer.setDataSource(fileDescripter.getFileDescriptor(), fileDescripter.getStartOffset(), fileDescripter.getLength());
+            musicPlayer.prepare();
+            musicPlayer.start();
+            musicPlayer.setLooping(true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -102,10 +102,10 @@ public class MediaPlayerActivity extends BaseActivity {
 
     private void playVideo(String videoSrc){
         try {
-            mediaPlayer.reset();
-            mediaPlayer.setDataSource(videoSrc);
-            mediaPlayer.prepareAsync();
-            mediaPlayer.setDisplay(mSurfaceView.getHolder());
+            musicPlayer.reset();
+            musicPlayer.setDataSource(videoSrc);
+            musicPlayer.prepareAsync();
+            musicPlayer.setDisplay(mSurfaceView.getHolder());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -115,13 +115,16 @@ public class MediaPlayerActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.start_button:
-                    playVideo(videoSrc);
-//                    playMusic(musicSrc);
+                case R.id.start_music_button:
+                    playMusic(musicSrc);
 //                    playAssetsMusic("jazz_ver-67.4-132.6.mp3");
                     break;
-                case R.id.pause_button:
-                    mediaPlayer.pause();
+                case R.id.start_video_button:
+                    playVideo(videoSrc);
+                    break;
+                case R.id.stop_button:
+                    musicPlayer.pause();
+//                    videoPlayer.pause();
                     break;
                 default:
                     break;
@@ -152,12 +155,13 @@ public class MediaPlayerActivity extends BaseActivity {
 
         @Override
         public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
         }
 
         @Override
         public void surfaceDestroyed(SurfaceHolder holder) {
-            if(mediaPlayer!=null && mediaPlayer.isPlaying()){
-                mediaPlayer.stop();
+            if(musicPlayer !=null && musicPlayer.isPlaying()){
+                musicPlayer.stop();
             }
         }
     };
@@ -165,7 +169,20 @@ public class MediaPlayerActivity extends BaseActivity {
     MediaPlayer.OnBufferingUpdateListener onBufferingUpdateLinsener = new MediaPlayer.OnBufferingUpdateListener() {
         @Override
         public void onBufferingUpdate(MediaPlayer mp, int percent) {
+            int videoWidth = mp.getVideoWidth();
+            int videoHeight = mp.getVideoHeight();
 
+            if(videoHeight<=0 || videoWidth<=0)
+                return;
+
+            DisplayMetrics metrics = ScreenUtil.getScreenMetrics(mContext);
+            int screenWidth = metrics.widthPixels;
+
+            ViewGroup.LayoutParams lp = mSurfaceView.getLayoutParams();
+
+            lp.height =videoHeight*screenWidth/videoWidth;
+
+            mSurfaceView.setLayoutParams(lp);
         }
     };
 

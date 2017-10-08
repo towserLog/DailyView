@@ -6,8 +6,9 @@
     <string name="mediaplayr">mediaplayr</string>
 
 
-    <string name="start">开始</string>
-    <string name="pause">暂停</string>
+    <string name="play_music">播放音乐</string>
+    <string name="stop">停止</string>
+    <string name="play_video">播放视频</string>
 
     <string name="vip">了解会员特权</string>
     <string name="wifi">仅Wi-Fi联网</string>

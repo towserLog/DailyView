@@ -11,26 +11,36 @@
 
     <SurfaceView
         android:id="@+id/surface_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         />
 
     <Button
-        android:id="@+id/pause_button"
+        android:id="@+id/start_music_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pause"
-        android:layout_below="@+id/start_button"
-        android:layout_centerHorizontal="true"
-        />
-
-    <Button
-        android:id="@+id/start_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/start"
+        android:text="@string/play_music"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
+        />
+
+    <Button
+        android:id="@+id/start_video_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/play_video"
+        android:layout_below="@+id/start_music_button"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:id="@+id/stop_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stop"
+        android:layout_below="@+id/start_video_button"
+        android:layout_centerHorizontal="true"
         />
 
 </RelativeLayout>
